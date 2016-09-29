@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//src/com/wjq/core/BaseController.java=UTF-8
+encoding//src/com/wjq/core/BasePathExpsoer.java=UTF-8
+encoding//src/com/wjq/core/ExampleTypeHandler.java=UTF-8
+encoding//src/com/wjq/core/LoginIntercetor.java=UTF-8
+encoding//src/com/wjq/core/PermissionInterceptor.java=UTF-8
+encoding//src/com/wjq/core/StringTypeHandler.java=UTF-8
+encoding//src/com/wjq/core/UTF8StringHttpMessageConverter.java=UTF-8
+encoding//src/com/wjq/core/des/DESUtils.java=UTF-8
+encoding//src/com/wjq/core/des/EncryptPropertyPlaceholderConfigurer.java=UTF-8
+encoding//src/com/wjq/util/TzConstant.java=UTF-8

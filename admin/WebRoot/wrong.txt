@@ -1,0 +1,4 @@
+<!-- parameterType 有声明 了该参数  就要放入 不管用不用 -->
+<select id="ContentsAccount" resultType="java.lang.Integer" parameterType="com.wjq.bean.WjqParams">
+		select count(1) from content
+	</select>  没有了 parameterType则不行

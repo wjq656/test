@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+validator.Checked=config/spring/applicationContext-log.xml,src/applicationContext.xml,config/spring/applicationContext.xml,config/applicationContext.xml
+validator.Unchecked=

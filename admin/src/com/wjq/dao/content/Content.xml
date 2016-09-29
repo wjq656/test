@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wjq.dao.content.IContentDao" >
+
+	<select id="findContents" resultType="com.wjq.bean.Content" parameterType="com.wjq.bean.WjqParams">
+		select top ${pageSize}
+			c.id as id,
+			title,
+			c.create_time as createTime,
+			u.username as userName,
+			is_top as isTop,
+			c.is_delete as isDelete,
+			hits,
+			loves,
+			c.is_comment as isComment,
+			collections
+		from content as c,users as u
+		where u.id = c.user_id and c.id not in (select top ${pageAll} id from content)
+	</select> 
+	
+	<select id="ContentsAccount" resultType="java.lang.Integer" parameterType="com.wjq.bean.WjqParams">
+		select count(1) from content
+	</select> 
+	<select id="searchAccount" resultType="java.lang.Integer" parameterType="com.wjq.bean.WjqParams">
+		select count(1)
+		from content 
+		where title like '%${keyword}%' 
+	</select>
+	<select id="searchContents" resultType="Content" parameterType="WjqParams"> 
+		select top ${pageSize}
+			c.id as id,
+			title,
+			c.create_time as createTime,
+			u.username as userName,
+			c.is_top as isTop,
+			c.is_delete as isDelete,
+			hits,
+			loves,
+			c.is_comment as isComment,
+			collections
+		from content as c,users as u
+		where u.id = c.user_id and title like '%${keyword}%' and c.id not in (select top ${pageAll} id from content  where title like '%${keyword}%') 
+	</select>
+	
+	<update id="update" parameterType="Content">
+		update content
+		<set>
+			<if test="@com.wjq.util.TmStringUtils@isNotEmpty(isDelete)">is_delete=#{isDelete},</if>
+			<if test="@com.wjq.util.TmStringUtils@isNotEmpty(isComment)">is_comment=#{isComment},</if>
+			<if test="@com.wjq.util.TmStringUtils@isNotEmpty(isTop)">is_top=#{isTop},</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<select id="findContents1" resultType="com.wjq.bean.Content" parameterType="com.wjq.bean.WjqParams">
+		SELECT top #{pageSize}
+			id,
+			title,
+			content,
+			create_time as createTime,
+			update_time as updateTime,
+			user_id as userId,
+			tag,
+			is_top as isTop,
+			is_delete as isDelete,
+			status,
+			channel_id as channelId,
+			img,
+			push,
+			is_comment as isComment,
+			hits,
+			loves,
+			collections,
+			static_link as staticLink,
+			keywords,
+			description,
+			sub_title as subTitle
+			FROM CONTENT
+		<trim prefix="WHERE" prefixOverrides="AND /OR">
+			<if test="@com.wjq.util.TmStringUtils@isNotEmpty(id)">
+				channel_id = #{channelId}
+			</if>
+			<if test="@com.wjq.util.TmStringUtils@isNotEmpty(id)">
+				title LIKE '%${keyword}% '
+			</if>
+			id  not in (select top #{pageNo}*#{pageSize} id from content)
+		</trim>
+		ORDER BY ${order}
+	</select>
+</mapper> 	  

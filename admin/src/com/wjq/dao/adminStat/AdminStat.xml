@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wjq.dao.adminStat.IAdminStatDao" >
+	<insert id="save" useGeneratedKeys="true" keyProperty="id"  parameterType="com.wjq.bean.AdminStat">
+		insert into adminStat(
+			ip,
+			ip_address,
+			user_id,
+			time,
+			method,
+			model,
+			class_name,
+			result_type,
+			description)
+		values(#{ip},#{ipAddress},#{userId},#{time},#{method},#{model},#{className},#{resultType},#{description})
+	</insert>
+</mapper>
